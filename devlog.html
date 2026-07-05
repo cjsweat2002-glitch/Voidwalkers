@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Log — Project Voidwalkers Archive</title>
+  <meta name="description" content="Transmission history documenting reconstruction of the Voidwalkers archive." />
+  <meta name="theme-color" content="#100f0d" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23100f0d'/%3E%3Cpath d='M50 15 L80 75 L20 75 Z' fill='none' stroke='%23d8d2bf' stroke-width='4'/%3E%3Ccircle cx='50' cy='55' r='6' fill='%23d8d2bf'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <div class="transmission-bar">
+    <span class="transmission-bar__dot">●</span>
+    <span>REC</span>
+    <span>SIGNAL INTEGRITY: 74%</span>
+    <span>ARCHIVE SESSION #VW-000</span>
+  </div>
+
+  <header class="site-header">
+    <a class="site-header__brand" href="index.html">VOIDWALKERS ARCHIVE</a>
+    <nav class="site-nav">
+      <a href="index.html">HOME</a>
+      <a href="codex.html">CODEX</a>
+      <a href="devlog.html" class="is-active">FIELD LOG</a>
+      <a href="index.html#correspondence">CORRESPONDENCE</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <p class="eyebrow">Field log</p>
+      <h1>TRANSMISSION HISTORY</h1>
+      <p>A running record of reconstruction activity on this archive, newest first.</p>
+    </section>
+
+    <div class="log-list" data-devlog-list></div>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 PROJECT VOIDWALKERS ARCHIVE</span>
+    <span>UNAUTHORIZED REPRODUCTION OF CLASSIFIED MATERIAL IS PROHIBITED</span>
+  </footer>
+
+  <script src="assets/js/towers-data.js"></script>
+  <script src="assets/js/devlog-data.js"></script>
+  <script src="assets/js/render.js"></script>
+</body>
+</html>

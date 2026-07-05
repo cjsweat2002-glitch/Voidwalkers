@@ -1,0 +1,135 @@
+/* ==========================================================================
+   VOIDWALKERS ARCHIVE — CODEX DATA
+   category: "tower" | "faction" | "apex" | "character"
+   status:   "draft" (shows PENDING REVIEW) | "approved" (shows DECLASSIFIED)
+
+   Any field set to null renders as a redacted bar automatically — that's
+   intentional for anything not locked in yet. Fill in a value and it
+   declassifies on its own. See README.md for the full add/edit workflow.
+   ========================================================================== */
+
+window.TOWERS_DATA = [
+  {
+    id: "tower-golb",
+    category: "tower",
+    designation: "TOWER-01",
+    name: "GOLB",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "tower-yig-sath",
+    category: "tower",
+    designation: "TOWER-02",
+    name: "YIG-SATH",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "tower-vashuul",
+    category: "tower",
+    designation: "TOWER-03",
+    name: "VASHUUL",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "tower-kremoth",
+    category: "tower",
+    designation: "TOWER-04",
+    name: "KREMOTH",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "tower-ssoleth",
+    category: "tower",
+    designation: "TOWER-05",
+    name: "SSOLETH",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "tower-nethavar",
+    category: "tower",
+    designation: "TOWER-06",
+    name: "NETHAVAR",
+    objectClass: "Harvester-class anomalous structure",
+    anchorEmotion: null,
+    function: "Harvesting of variant-self resonance patterns across adjacent dimensional strata.",
+    oversight: "Director of Aeons (Ael-Vanthoris)",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "faction-mechanized",
+    category: "faction",
+    designation: "FACTION-01",
+    name: "THE MECHANIZED",
+    objectClass: "Autonomous border-enforcement faction",
+    anchorEmotion: null,
+    function: "Border patrol and containment enforcement along the dimensional perimeter.",
+    oversight: null,
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "apex-director-of-aeons",
+    category: "apex",
+    designation: "APEX-00",
+    name: "DIRECTOR OF AEONS (AEL-VANTHORIS)",
+    objectClass: "Meta-entity, oversight authority",
+    anchorEmotion: null,
+    function: "Supreme oversight of Tower operations across all dimensional strata.",
+    oversight: "None identified.",
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+  {
+    id: "character-kaelen",
+    category: "character",
+    designation: "SUBJECT-01",
+    name: "KAELEN",
+    objectClass: "Passive Witness",
+    anchorEmotion: "Tranquil Horror",
+    function: "Anchor emotion renders subject unharvestable via standard Tower resonance extraction.",
+    oversight: null,
+    threatAssessment: null,
+    fieldNotes: null,
+    status: "draft",
+  },
+];
+
+/*
+  TO ADD A NEW ENTRY: copy an object above, change the id/designation/name,
+  and fill in what you know. Leave anything undecided as null — it will
+  render as a redacted bar until you replace it with real text.
+*/

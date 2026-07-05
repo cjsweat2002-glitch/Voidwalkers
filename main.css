@@ -1,0 +1,491 @@
+/* ==========================================================================
+   VOIDWALKERS ARCHIVE — DESIGN SYSTEM
+   Two materials in tension: a dark terminal shell (the archive interface)
+   viewing recovered paper documents (the dossiers). Redaction and status
+   stamps are functional, not decorative — they are the content pipeline.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Mono:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+:root {
+  /* -- color: shell (dark terminal) -- */
+  --ink-black: #100f0d;
+  --shell-raised: #17150f;
+  --shell-border: #38352a;
+  --text-on-shell: #d8d2bf;
+  --text-on-shell-dim: #8c8672;
+
+  /* -- color: paper (recovered documents) -- */
+  --paper: #e8e1cc;
+  --paper-shadow: #c9bfa0;
+  --text-on-paper: #201c16;
+  --text-on-paper-dim: #5b5644;
+
+  /* -- color: ink stamps (semantic, not decorative) -- */
+  --ink-red: #8a2a2a;
+  --ink-green: #3f5c46;
+
+  /* -- type -- */
+  --font-stamp: 'Special Elite', 'Courier New', monospace;
+  --font-terminal: 'Space Mono', 'Courier New', monospace;
+  --font-read: 'Source Serif 4', Georgia, serif;
+
+  /* -- space -- */
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.75rem;
+  --sp-4: 2.75rem;
+  --sp-5: 4.5rem;
+
+  --radius: 2px;
+  --max-width: 68rem;
+}
+
+/* -- reset -- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ink-black);
+  color: var(--text-on-shell);
+  font-family: var(--font-read);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+h1, h2, h3, p, dl, dd, figure { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; padding: 0; }
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--ink-red);
+  outline-offset: 3px;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-3) var(--sp-5);
+}
+
+/* ==========================================================================
+   ATMOSPHERE — grain + scanline overlays, subtle, physically-motivated
+   ========================================================================== */
+
+.grain-overlay,
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+}
+.grain-overlay {
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.scanline-overlay {
+  opacity: 0.035;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7) 0px,
+    rgba(255, 255, 255, 0.7) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay, .scanline-overlay { display: none; }
+}
+
+/* ==========================================================================
+   TRANSMISSION BAR + HEADER
+   ========================================================================== */
+
+.transmission-bar {
+  background: var(--shell-raised);
+  border-bottom: 1px solid var(--shell-border);
+  font-family: var(--font-terminal);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-on-shell-dim);
+  padding: 0.4rem var(--sp-3);
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.transmission-bar__dot {
+  color: var(--ink-red);
+  animation: pulse-flicker 2.4s ease-in-out infinite;
+}
+@keyframes pulse-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .transmission-bar__dot { animation: none; }
+}
+
+.site-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--sp-3) var(--sp-3) var(--sp-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-3);
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--shell-border);
+}
+.site-header__brand {
+  font-family: var(--font-stamp);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--text-on-shell);
+}
+.site-nav {
+  display: flex;
+  gap: var(--sp-3);
+  font-family: var(--font-terminal);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+.site-nav a {
+  text-decoration: none;
+  color: var(--text-on-shell-dim);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+}
+.site-nav a:hover { color: var(--text-on-shell); }
+.site-nav a.is-active {
+  color: var(--text-on-shell);
+  border-bottom-color: var(--ink-red);
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  padding: var(--sp-5) 0 var(--sp-4);
+  max-width: 42rem;
+}
+.eyebrow {
+  font-family: var(--font-terminal);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-red);
+  margin: 0 0 var(--sp-2);
+}
+.hero h1 {
+  font-family: var(--font-stamp);
+  font-size: clamp(2.25rem, 7vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--text-on-shell);
+  text-shadow: 1px 0 rgba(255, 255, 255, 0.08);
+}
+.case-number {
+  font-family: var(--font-terminal);
+  font-size: 0.82rem;
+  color: var(--text-on-shell-dim);
+  margin-top: var(--sp-2);
+  letter-spacing: 0.02em;
+}
+.hero__intro {
+  margin-top: var(--sp-3);
+  font-size: 1.08rem;
+  color: var(--text-on-shell);
+  max-width: 38rem;
+}
+
+/* ==========================================================================
+   ACCESS GRID (home)
+   ========================================================================== */
+
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+.access-card {
+  display: block;
+  text-decoration: none;
+  background: var(--shell-raised);
+  border: 1px solid var(--shell-border);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.access-card:hover {
+  border-color: var(--text-on-shell-dim);
+  transform: translateY(-2px);
+}
+.access-card__tag {
+  display: inline-block;
+  font-family: var(--font-terminal);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-on-shell-dim);
+  border: 1px solid var(--shell-border);
+  border-radius: var(--radius);
+  padding: 0.15em 0.5em;
+  margin-bottom: var(--sp-2);
+}
+.access-card h2 {
+  font-family: var(--font-stamp);
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+.access-card p {
+  color: var(--text-on-shell-dim);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   CORRESPONDENCE
+   ========================================================================== */
+
+.correspondence {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--shell-border);
+  max-width: 34rem;
+}
+.correspondence h2 {
+  font-family: var(--font-stamp);
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--sp-2);
+}
+.correspondence p { color: var(--text-on-shell-dim); }
+.correspondence__contact {
+  margin-top: var(--sp-2);
+  font-family: var(--font-terminal);
+  color: var(--text-on-shell) !important;
+  border: 1px dashed var(--shell-border);
+  padding: var(--sp-2);
+  border-radius: var(--radius);
+}
+
+/* ==========================================================================
+   PAGE HEADER (codex / devlog)
+   ========================================================================== */
+
+.page-header {
+  padding: var(--sp-4) 0 var(--sp-3);
+  max-width: 40rem;
+}
+.page-header h1 {
+  font-family: var(--font-stamp);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-2);
+}
+.page-header p { color: var(--text-on-shell-dim); }
+
+/* ==========================================================================
+   FILTER TABS (codex)
+   ========================================================================== */
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-3);
+}
+.filter-tabs button {
+  font-family: var(--font-terminal);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-on-shell-dim);
+  border: 1px solid var(--shell-border);
+  border-radius: var(--radius);
+  padding: 0.4em 0.9em;
+}
+.filter-tabs button:hover { color: var(--text-on-shell); }
+.filter-tabs button.is-active {
+  color: var(--ink-black);
+  background: var(--text-on-shell-dim);
+  border-color: var(--text-on-shell-dim);
+}
+
+/* ==========================================================================
+   DOSSIER CARDS (paper material, on the dark shell)
+   ========================================================================== */
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: var(--sp-2);
+}
+.dossier {
+  background: var(--paper);
+  color: var(--text-on-paper);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.dossier__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: var(--sp-2) var(--sp-2) var(--sp-1);
+  text-align: left;
+}
+.dossier__designation {
+  font-family: var(--font-terminal);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-on-paper-dim);
+}
+.dossier__name {
+  font-family: var(--font-stamp);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+.dossier__header::after {
+  content: "▸ expand dossier";
+  font-family: var(--font-terminal);
+  font-size: 0.65rem;
+  color: var(--text-on-paper-dim);
+  letter-spacing: 0.04em;
+}
+.dossier__header[aria-expanded="true"]::after {
+  content: "▾ collapse dossier";
+}
+.dossier__body {
+  padding: 0 var(--sp-2) var(--sp-2);
+  border-top: 1px dashed var(--paper-shadow);
+  margin-top: 0.35rem;
+  padding-top: var(--sp-2);
+}
+.dossier__fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem var(--sp-2);
+  font-size: 0.92rem;
+}
+.dossier__fields dt {
+  font-family: var(--font-terminal);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-on-paper-dim);
+  white-space: nowrap;
+  padding-top: 0.15em;
+}
+.dossier__fields dd { margin: 0; }
+
+/* -- ink stamps -- */
+.stamp {
+  display: inline-block;
+  align-self: flex-start;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  font-family: var(--font-stamp);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 0.68rem;
+  padding: 0.15em 0.55em;
+  transform: rotate(-3deg);
+  mix-blend-mode: multiply;
+}
+.stamp--pending { color: var(--ink-red); }
+.stamp--approved { color: var(--ink-green); }
+
+/* -- redaction: the signature element -- */
+.redacted {
+  display: inline-block;
+  height: 0.8em;
+  min-width: 3.5em;
+  background: #14110d;
+  border-radius: 1px;
+  vertical-align: middle;
+  position: relative;
+  top: -0.05em;
+  cursor: help;
+}
+.redacted.is-denied { animation: redacted-deny 0.3s ease; }
+@keyframes redacted-deny {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .redacted.is-denied { animation: none; }
+}
+
+/* ==========================================================================
+   DEVLOG / FIELD LOG
+   ========================================================================== */
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.logentry {
+  border-left: 2px solid var(--shell-border);
+  padding-left: var(--sp-2);
+}
+.logentry__meta {
+  display: flex;
+  gap: var(--sp-2);
+  font-family: var(--font-terminal);
+  font-size: 0.72rem;
+  color: var(--text-on-shell-dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.logentry__title {
+  font-family: var(--font-stamp);
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+.logentry__body p {
+  color: var(--text-on-shell);
+  max-width: 42rem;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--sp-4) var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--shell-border);
+  font-family: var(--font-terminal);
+  font-size: 0.72rem;
+  color: var(--text-on-shell-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 40rem) {
+  .site-header { padding-top: var(--sp-2); }
+  .dossier-grid { grid-template-columns: 1fr; }
+  .dossier__fields { grid-template-columns: 1fr; gap: 0.15rem 0; }
+  .dossier__fields dt { margin-top: 0.4rem; }
+}
