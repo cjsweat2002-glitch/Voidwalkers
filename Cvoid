@@ -1,7 +1,0 @@
-cd voidwalkers-archive
-git init
-git add -A
-git commit -m "Initial commit: Voidwalkers archive"
-git branch -M main
-git remote add origin <paste the URL you copied>
-git push -u origin main
